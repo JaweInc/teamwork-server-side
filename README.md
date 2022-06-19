@@ -28,9 +28,9 @@ Set up the node/express server and RESTful API, then persist the data with Postg
 7.  Employees can delete their gifs post.
 8.  Employees can comment on other colleagues' article post.
 9.  Employees can comment on other colleagues' gif post.
-10.  Employees can view all articles and gifs, showing the most recently posted articles or gifs first.
-11.  Employees can view a specific article.
-12.  Employees can view a specific gif post.
+10. Employees can view all articles and gifs, showing the most recently posted articles or gifs first.
+11. Employees can view a specific article.
+12. Employees can view a specific gif post.
 
 ## **Getting Started**
 
