@@ -1,7 +1,7 @@
 import connect from '../utils/DbConnect';
 
 const db = {
-    create: async (tableName: string, entities: any) => (
+    create: async (tableName: string, entities: any) => await connect.query(
         `
             INSERT INTO ${tableName}(${Object.keys(entities).join(', ')})
             VALUES('${Object.values(entities).join('\', \'')}') RETURNING *

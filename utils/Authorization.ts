@@ -1,7 +1,6 @@
 import jwt, { Secret } from 'jsonwebtoken'
 import dotenv from 'dotenv'
 
-
 dotenv.config()
 
 const jwtGenerator = (eid: any) => {

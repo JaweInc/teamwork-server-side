@@ -9,19 +9,13 @@ const CreateUser = async (req: any, res: any) => {
   const bcryptPassword = await bcrypt.hash(password, salt);
 
   try {
-    console.log("1")
     const checkUser = await db.selectAll('employee', {email})
-    console.log("2")
-    //console.log(checkUser)
-    if (checkUser.rows.length === 0) {
-      console.log("3")
+    if (checkUser?.rows?.length === 0) {
       const insertUser = await db.create('employee', {
         firstname, lastname, email, password: bcryptPassword, gender, jobrole, department, address
       });
-      console.log("4")
 
-      const token = jwtGenerator(insertUser.rows[0].id);
-      console.log("5");
+      const token = jwtGenerator(insertUser?.rows?.[0]?.id);
 
       if (!insertUser) {
         console.log('There is no user');
@@ -30,9 +24,9 @@ const CreateUser = async (req: any, res: any) => {
           message: 'Ops! Cannot create user account',
         });
       }
-      console.log("6")
       return res.status(200).json({
         status: 'success',
+        token,
         message: 'User account successfully created',
       });
     }
