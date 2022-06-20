@@ -8,29 +8,19 @@ const pool = new Pool({
     host: process.env.DB_HOST,
     port: Number(process.env.DB_PORT),
     database: process.env.DB_NAME
-
-    // user: 'postgres',
-    // password: 'qwerty',
-    // host: 'localhost',
-    // port: 5432,
-    // database: 'teamwork'
 })
 
-// console.log(process.env)
-
-pool.on('connect', ()=>{
-    console.log("connected to db...");
+pool.on('connect', () => {
+    console.log("Connected to db...");
+})
+pool.on('error', () => {
+    console.log("There was an error connecting to db...");
+})
+pool.on('acquire', () => {
+    console.log("Sent Query...");
+})
+pool.on('remove', () => {
+    console.log("Database disconnected...");
 })
 
-pool.on('error', ()=>{
-    console.log("error to db...");
-})
-
-pool.on('acquire', ()=>{
-    console.log("acquire to db...");
-})
-
-pool.on('remove', ()=>{
-    console.log("remove to db...");
-})
 export default pool
