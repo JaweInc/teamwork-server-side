@@ -21,15 +21,15 @@ const db = {
         `
     ),
 
-    selectColumns: async (tableName: any, columns: string[], conditionalStatement: any) => (
+    selectColumns: async (tableName: any, columns: string[], conditionalStatement: any = {}) => (
         `
-            SELECT ${ columns.join(', ') }
-            FROM ${tableName} 
+            SELECT '${ columns.join(', ') }'
+            FROM ${tableName}
             ${Object
                 .entries(conditionalStatement)
                 .reduce(( cumm, arr, i, array ) => (
-                    `${!i ? 'WHERE ' : ''}` + cumm + `${ arr[0]} = '${arr[1]}' ${ i < array.length - 1 ?  'AND' : '' } `
-                ), '' )
+                    `${!i ? 'WHERE ' : ''}` + cumm + `${ arr[0]} = '${arr[1]}' ${ i < array.length - 1 ?  'AND ' : '' } `
+                ), '')
             }
         `
     ),
