@@ -18,7 +18,6 @@ const CreateUser = async (req: any, res: any) => {
       const token = jwtGenerator(insertUser?.rows?.[0]?.id);
 
       if (!insertUser) {
-        console.log('There is no user');
         return res.status(400).json({
           status: 'error',
           message: 'Ops! Cannot create user account',
