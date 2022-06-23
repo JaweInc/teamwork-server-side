@@ -12,13 +12,14 @@ const AdminSignin = async (req: any, res: any) => {
         const token = jwtGenerator(signinAdmin?.rows?.[0]?.id);
 
         if (signinAdmin?.rows?.length === 0) {
-            return res.status(400).json({
+            return res.status(401).json({
                 status: 'error',
                 message: 'Invalid login credentials'
             })
         }
         return res.status(200).json({
             status: 'success',
+            token,
             message: 'Welcome Admin'
         })
     } catch {
