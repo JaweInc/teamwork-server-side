@@ -15,7 +15,7 @@ const CreateUser = async (req: any, res: any) => {
         firstname, lastname, email, password: bcryptPassword, gender, jobrole, department, address
       });
 
-      const token = jwtGenerator(insertUser?.rows?.[0]?.id);
+      //const token = jwtGenerator(insertUser?.rows?.[0]?.id);
 
       if (!insertUser) {
         return res.status(400).json({
@@ -25,7 +25,7 @@ const CreateUser = async (req: any, res: any) => {
       }
       return res.status(200).json({
         status: 'success',
-        token,
+        //token,
         message: 'User account successfully created',
       });
     }

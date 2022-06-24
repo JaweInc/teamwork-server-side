@@ -1,9 +1,8 @@
-import jwt from 'jsonwebtoken'
 import dotenv from 'dotenv'
 
 dotenv.config()
 
-export const Auths = async (req, res, next) => {
+const Auths = async (req: any, res: any, next: any) => {
     try {
         const jwtToken = req.header("token")
 
@@ -13,9 +12,10 @@ export const Auths = async (req, res, next) => {
                 message: 'Not Authorize'
             })
         }
-
-        const payload = jwt.verify(jwtToken, process.env.jwtSecret)
-        req.user = payload.user;
+        //const payload = jwt.sign(jwtToken, (process.env.jwtSecret) as Secret)
+        req.token = jwtToken;
+        next()
+        //console.log(payload)
 
     } catch {
         return res.status(403).json({
@@ -24,3 +24,5 @@ export const Auths = async (req, res, next) => {
         })
     }
 }
+
+export  default Auths

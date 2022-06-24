@@ -1,5 +1,7 @@
 import db from '../../orm/orm';
-import jwtGenerator from '../../utils/Authorization';
+import dotenv from 'dotenv'
+
+dotenv.config()
 
 const AdminSignin = async (req: any, res: any) => {
     const { username, password } = req.body;
@@ -9,8 +11,6 @@ const AdminSignin = async (req: any, res: any) => {
             password
         })
 
-        const token = jwtGenerator(signinAdmin?.rows?.[0]?.id);
-
         if (signinAdmin?.rows?.length === 0) {
             return res.status(401).json({
                 status: 'error',
@@ -19,7 +19,7 @@ const AdminSignin = async (req: any, res: any) => {
         }
         return res.status(200).json({
             status: 'success',
-            token,
+            //token,
             message: 'Welcome Admin'
         })
     } catch {
