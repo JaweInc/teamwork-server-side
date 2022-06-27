@@ -50,7 +50,19 @@ const db = {
                 ), '')
             }
         `
-    )
+    ),
+
+    deleteRow: async (tableName: any, conditionalStatement: any = {}) => await connect.query(
+        `
+            DELETE FROM ${tableName}
+            ${Object
+                .entries(conditionalStatement)
+                .reduce(( cumm, arr, i, array ) => (
+                    `${!i ? 'WHERE ' : ''}` + cumm + `${ arr[0]} = '${arr[1]}' ${ i < array.length - 1 ?  'AND' : '' } `
+                ), '')
+            }
+        `
+    ),
 };
 
 export default db;
