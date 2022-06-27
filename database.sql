@@ -34,7 +34,7 @@ CREATE TABLE add_article (
     employee_id INT,
     title VARCHAR(255),
     article TEXT,
-    created DATIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+    created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
 

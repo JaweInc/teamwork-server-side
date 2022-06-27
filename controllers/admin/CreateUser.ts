@@ -1,5 +1,4 @@
 import bcrypt from 'bcrypt';
-import jwtGenerator from '../../utils/Authorization';
 import db from '../../orm/orm';
 
 const CreateUser = async (req: any, res: any) => {
@@ -15,8 +14,6 @@ const CreateUser = async (req: any, res: any) => {
         firstname, lastname, email, password: bcryptPassword, gender, jobrole, department, address
       });
 
-      //const token = jwtGenerator(insertUser?.rows?.[0]?.id);
-
       if (!insertUser) {
         return res.status(400).json({
           status: 'error',
@@ -31,7 +28,7 @@ const CreateUser = async (req: any, res: any) => {
     }
     return res.status(400).json({
       status: 'error',
-      message: 'User already exist',
+      message: 'User already exists',
     });
   } catch {
     return res.status(400).json({
