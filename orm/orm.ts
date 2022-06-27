@@ -21,7 +21,7 @@ const db = {
         `
     ),
 
-    selectColumns: async (tableName: any, columns: string[], conditionalStatement: any = {}) => (
+    selectColumns: async (tableName: any, columns: string[], conditionalStatement: any = {}) => await connect.query(
         `
             SELECT '${ columns.join(', ') }'
             FROM ${tableName}
@@ -33,6 +33,24 @@ const db = {
             }
         `
     ),
+
+    updateColumns: async (tableName: any, columns: any, conditionalStatement: any = {}) => await connect.query(
+        `
+            UPDATE ${tableName}
+            SET ${Object
+                .entries(columns)
+                .reduce((cumm, arr, index, array) => (
+                    cumm + `${ arr[0]} = '${arr[1]}'${ index < array.length - 1 ?  ',' : '' } `
+                ), '')
+            }
+            ${Object
+                .entries(conditionalStatement)
+                .reduce((cumm, arr, index, array) => (
+                    `${!index ? 'WHERE ': ''}` + cumm + `${ arr[0]} = '${arr[1]}' ${ index < array.length - 1 ?  'AND ' : '' } `
+                ), '')
+            }
+        `
+    )
 };
 
 export default db;

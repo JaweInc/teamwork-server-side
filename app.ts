@@ -8,6 +8,6 @@ const app = express();
 app.use(express.json());
 app.use('/api/v1', apiVersion);
 
-app.listen(5000, () => {
-  console.log('Server listening at port 5000...');
+app.listen(5001, () => {
+  console.log('Server listening at port 5001...');
 });
