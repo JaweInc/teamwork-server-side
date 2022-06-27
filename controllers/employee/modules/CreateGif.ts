@@ -4,8 +4,7 @@ import dotenv from 'dotenv'
 dotenv.config()
 
 const CreateGif = (req: any, res: any) => {
-    console.log(1)
-    jwt.verify(req.token, (process.env.jwtSecret as Secret), async (err: any, authData: any) => {
+        jwt.verify(req.token, (process.env.jwtSecret as Secret), async (err: any, authData: any) => {
         if (err) res.sendStatus(403);
         const eid = authData.userId
         const { image, title } = req.body;
@@ -19,7 +18,6 @@ const CreateGif = (req: any, res: any) => {
                     image,
                     title
                 })
-                console.log(addGif)
                 if (!addGif) {
                     return res.status(400).json({
                         status: 'error',
@@ -29,7 +27,7 @@ const CreateGif = (req: any, res: any) => {
             } else {
                 return res.status(400).json({
                     status: 'error',
-                    message: 'error Uploading gif. gif already exist',
+                    message: 'error Uploading gif. gif already exists',
                 });
             }
 
