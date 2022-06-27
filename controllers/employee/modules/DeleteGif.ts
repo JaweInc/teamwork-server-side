@@ -3,32 +3,32 @@ import jwt, { Secret } from "jsonwebtoken"
 import dotenv from 'dotenv'
 dotenv.config()
 
-const DeleteArticle = (req: any, res: any) => {
+const DeleteGif = (req: any, res: any) => {
     jwt.verify(req.token, (process.env.jwtSecret as Secret), async (err: any, authData: any) => {
         try {
             const eid = authData.userId;
             const { id } = req.params;
             if (err) res.sendStatus(403);
-            const getArticle = await db.selectAll('add_article', {
+            const getGif = await db.selectAll('add_gif', {
                 id,
                 employee_id: eid
             })
 
-            if (getArticle.rows.length === 0) {
+            if (getGif.rows.length === 0) {
                 return res.status(403).json({
                     status: 'error',
-                    message: 'Unable to get article'
+                    message: 'Unable to get gif'
                 })
             } else {
-                const deleteArticle = await db.deleteRow('add_article', {
+                const deleteGif = await db.deleteRow('add_gif', {
                     id,
                     employee_id: eid
                 })
 
-                if (!deleteArticle) {
+                if (!deleteGif) {
                     return res.status(403).json({
                         status: 'error',
-                        message: 'Unable to delete article'
+                        message: 'Unable to delete gif'
                     })
                 }
             }
@@ -47,4 +47,4 @@ const DeleteArticle = (req: any, res: any) => {
     })
 }
 
-export default DeleteArticle
+export default DeleteGif

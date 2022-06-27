@@ -9,6 +9,7 @@ import CreateArticle from '../controllers/employee/modules/CreateArticle';
 import Article from '../controllers/employee/modules/Article';
 import EditArticle from '../controllers/employee/modules/EditArticle';
 import DeleteArticle from '../controllers/employee/modules/DeleteArticle';
+import DeleteGif from '../controllers/employee/modules/DeleteGif';
 
 const api = Router();
 api.get('/', Homepage);
@@ -20,5 +21,6 @@ api.post('/createArticle', Auths, CreateArticle);
 api.get('/article/:id', Article);
 api.put('/edit-article/:id', Auths, EditArticle);
 api.delete('/delete-article/:id', Auths, DeleteArticle);
+api.delete('/delete-gif/:id', Auths, DeleteGif);
 
 export default api;
