@@ -51,7 +51,6 @@ CREATE TABLE gif_comment (
     id SERIAL PRIMARY KEY,
     employee_id INT,
     gif_id INT,
-    comment TEXT
+    comment TEXT,
     created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
-
