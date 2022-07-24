@@ -26,6 +26,7 @@ CREATE TABLE add_gif (
     employee_id INT,
     image VARCHAR(255),
     title VARCHAR(255),
+    resource_id VARCHAR(255),
     created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -34,6 +35,7 @@ CREATE TABLE add_article (
     employee_id INT,
     title VARCHAR(255),
     article TEXT,
+    resource_id VARCHAR(255),
     created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -54,3 +56,13 @@ CREATE TABLE gif_comment (
     comment TEXT,
     created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
+
+ALTER TABLE add_article
+ADD resource_id VARCHAR(255);
+
+SET FOREIGN_KEY_CHECKS = 0; 
+TRUNCATE table add_gif; 
+SET FOREIGN_KEY_CHECKS = 1;
+
+ALTER TABLE add_gif
+DROP CONSTRAINT PK_Id

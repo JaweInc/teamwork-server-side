@@ -1,6 +1,7 @@
 import db from '../../../orm/orm'
 import jwt, { Secret } from 'jsonwebtoken';
 import dotenv from 'dotenv'
+import { v4 as uuidv4 } from 'uuid';
 dotenv.config()
 
 const CreateArticle = (req: any, res: any) => {
@@ -8,12 +9,13 @@ const CreateArticle = (req: any, res: any) => {
     jwt.verify(req.token, (process.env.jwtSecret as Secret), async (err: any, authData: any) => {
         if (err) res.sendStatus(403);
         const { title, article } = req.body;
+        const resourceId = uuidv4();
         const eid = authData.userId
         try {
             const addArticle = await db.create('add_article', {
                 employee_id: eid,
                 title,
-                article
+                article,
             })
             if (!addArticle) {
                 return res.status(403).json({
