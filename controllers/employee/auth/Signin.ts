@@ -11,7 +11,6 @@ const EmployeeSignin = async (req: any, res: any) => {
         const userId = signinQuery?.rows?.[0]?.id
         const verifyPassword = await bcrypt.compare(password, signinQuery.rows[0].password)
         const token = jwt.sign({userId}, (process.env.jwtSecret as Secret));
-        console.log(token)
 
         if (verifyPassword && signinQuery.rows.length !== 0) {
             return res.status(200).json({

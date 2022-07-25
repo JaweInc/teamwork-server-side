@@ -3,10 +3,10 @@ const Feeds = async (req: any, res: any) => {
     try {
         const getFeeds = await connect.query(
         `
-            SELECT 'article' AS Type, a.id AS id, a.employee_id AS employee_id, a.title AS title, a.article AS post, a.created AS created
+            SELECT 'article' AS Type, a.id AS id, a.employee_id AS employee_id, a.title AS title, a.article AS post, a.created AS created, a.resource_id AS resource_id
             FROM add_article a
             UNION
-            SELECT 'gif', b.id AS id, b.employee_id AS employee_id, b.title AS title, b.image AS image, b.created AS created
+            SELECT 'gif', b.id AS id, b.employee_id AS employee_id, b.title AS title, b.image AS image, b.created AS created, b.resource_id AS resource_id
             FROM add_gif b
             ORDER BY created DESC
         `)
@@ -19,7 +19,6 @@ const Feeds = async (req: any, res: any) => {
         }
 
         return res.status(200).json({
-            status: 'success',
             data: getFeeds?.rows
         })
     } catch {
